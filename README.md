@@ -3,7 +3,7 @@
 
 ## Cerinte:
 - [ ] (**1 - Ana**) Fiind dată o funcție f , introdusă de utilizator, determinarea unei constante de normalizare k. Ȋn cazul ȋn care o asemenea constantă nu există, afișarea unui mesaj corespunzător către utilizator.
-- [ ] (**2 - Ana**) Verificarea dacă o funcție introdusă de utilizator este densitate de probabilitate.
+- [ ] (**2 - Darius**) Verificarea dacă o funcție introdusă de utilizator este densitate de probabilitate.
 - [ ] (**3 - Ana**) Crearea unui obiect de tip variabilă aleatoare continuă pornind de la o densitate de probabilitate introdusă de utilizator.
 - [ ] (**4 - Stefan**) Reprezentarea grafică a densității și a funcției de repartiție pentru diferite valori ale parametrilor repartiției. Ȋn cazul ȋn care funcția de repartiție nu este dată ȋntr-o formă explicită (*ex. repartiția normală*) se acceptă reprezentarea grafică a unei aproximări a acesteia.
 - [ ] (**5 - Darius**) Calculul mediei, dispersiei și a momentelor inițiale și centrate pȃnă la ordinul 4 (*dacă există*). Atunci cȃnd unul dintre momente nu există, se va afișa un mesaj corespunzător către utilizator.
