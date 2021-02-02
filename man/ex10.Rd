@@ -12,4 +12,6 @@
      return (3/2 * (x^2+y^2))
   }
   covariance_and_correlation(f, c(0,1), c(0,3))
+  covariance_and_correlation(f, c(1,1), c(0,4))
+  covariance_and_correlation(f, c(7,100), c(101,300))
 }
