@@ -11,6 +11,6 @@
 - [ ] (**7 - Nix**) Crearea unei funcții P care permite calculul diferitelor tipuri de probabilități asociate unei variabile aleatoare continue (similar funcției P din pachetul discreteRV)
 - [ ] (**8 - Stefan**) Afișarea unei “fișe de sinteză” care să conțină informații de bază despre respectiva repartiție (*cu precizarea sursei informației!*). Relevant aici ar fi să precizați pentru ce e folosită ȋn mod uzual acea repartiție, semnificația parametrilor, media, dispersia etc.
 - [ ] (**9**) Generarea a n valori (*unde n este precizat de utilizator!*) dintr-o repartiție de variabile aleatoare continue (*vezi materialul suport pentru partea de simulare*).
-- [ ] (**10 - Darius**) Calculul covarianței și coeficientului de corelație pentru două variabile aleatoare continue (*Atenție: Trebuie să folosiți densitatea comună a celor două variabile aleatoare!*)
+- [x] (**10 - Darius**) Calculul covarianței și coeficientului de corelație pentru două variabile aleatoare continue (*Atenție: Trebuie să folosiți densitatea comună a celor două variabile aleatoare!*)
 - [ ] (**11**) Pornind de la densitatea comună a două variabile aleatoare continue, construirea densităților marginale și a densităților condiționate.
 - [ ] (**12**) Construirea sumei și diferenței a două variabile aleatoare continue independente (*folosiți formula de convoluție*)
