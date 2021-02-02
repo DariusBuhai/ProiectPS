@@ -15,14 +15,6 @@ is_positive <- function(f, lo = -10000000, hi=10000000){
   all(f(vals)>=0)
 }
 
-# Integrate a function and return False if it generates errors
-safe_integrate <- function(f){
-  tryCatch(integrate(Vectorize(f), -Inf, Inf),
-           error = function(e){
-             FALSE
-           })
-}
-
 check_pdf <- function(f){
   # Check if the function is positive
   if(!is_positive(f))
