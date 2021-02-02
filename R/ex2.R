@@ -1,9 +1,21 @@
+# Example
+# f <- function(x){
+#   if (x > 0 && x < 2){
+#      3/8 * (4*x-2*x^2)
+#   }else{
+#      0
+#   }
+# }
+#
+# check_pdf(f)
 
+# Check if a function is positive in a given interval
 is_positive <- function(f, lo = -10000000, hi=10000000){
   vals <- seq(lo, hi, len=100000)
   all(f(vals)>=0)
 }
 
+# Integrate a function and return False if it generates errors
 safe_integrate <- function(f){
   tryCatch(integrate(Vectorize(f), -Inf, Inf),
            error = function(e){
