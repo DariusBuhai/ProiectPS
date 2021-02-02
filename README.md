@@ -13,4 +13,4 @@
 - [ ] (**9**) Generarea a n valori (*unde n este precizat de utilizator!*) dintr-o repartiție de variabile aleatoare continue (*vezi materialul suport pentru partea de simulare*).
 - [x] (**10 - Darius**) Calculul covarianței și coeficientului de corelație pentru două variabile aleatoare continue (*Atenție: Trebuie să folosiți densitatea comună a celor două variabile aleatoare!*)
 - [ ] (**11**) Pornind de la densitatea comună a două variabile aleatoare continue, construirea densităților marginale și a densităților condiționate.
-- [ ] (**12**) Construirea sumei și diferenței a două variabile aleatoare continue independente (*folosiți formula de convoluție*)
+- [ ] (**12 - Nix**) Construirea sumei și diferenței a două variabile aleatoare continue independente (*folosiți formula de convoluție*)
