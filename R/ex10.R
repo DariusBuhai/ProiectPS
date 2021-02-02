@@ -3,7 +3,7 @@
 #   return (3/2 * (x^2+y^2))
 # }
 #
-# covariance_and_corelation(f1, c(0,1), c(0, 1))
+# covariance_and_correlation(f1, c(0,1), c(0, 1))
 
 # Extracts x out of common density of x and y
 extractXMarginal <- function(f, dx){
@@ -33,8 +33,8 @@ median <- function(f, d){
   integrate(function(x){ x * f(x)}, d[1], d[2]) $ value
 }
 
-# Calculates median
-covariance_and_corelation <- function(pdf, dx, dy){
+# Calculates Covariance and Correlation coefficient
+covariance_and_correlation <- function(pdf, dx, dy){
 
   fx = extractXMarginal(pdf, dx)
   fy = extractYMarginal(pdf, dy)
