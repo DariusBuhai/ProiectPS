@@ -5,7 +5,7 @@
   covariance_and_correlation(pdf, dx, dy)
 }
 \description{
-  Calculul covarianței și coeficientului de corelație pentru două variabile aleatoare continue
+  Calculul covariantei si coeficientului de corelatie pentru doua variabile aleatoare continue
 }
 \examples{
   f <- function (x, y) {
