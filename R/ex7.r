@@ -17,12 +17,8 @@
       return ( fun )
  }
 
-library(sjmisc)
 myP <- function(f, p) {
   operatii_posibile=c("<=",">=","=","<",">")
-
-
-  ############## FUNCTII HELPER #############
 
   parseaza_expresie <- function(expresie) {
 
@@ -45,18 +41,23 @@ myP <- function(f, p) {
 
   }
 
+cdf <- function(bound) { return (integrate(f, -Inf, bound) $ value)}
+
+compute_bound <-function(bound) {
+  rez <- switch(bound,
+                "-Inf" = -Inf,
+                "+Inf" = +Inf,
+                as.double(bound))
+  return (rez)
+  }
 ## Calculeaza probabilitatea ##
 evalueaza <- function(operator, bound) {
 
-  bound = switch(bound,
-                 "-Inf" = -Inf,
-                 "+Inf" = +Inf,
-                 as.double(bound))
-
-  integrala <- integrate(f, -Inf, bound) $ value
+  bound = compute_bound(bound)
+  integrala <- cdf(bound)
   print(operator)
   print(bound)
-  return (integrala)
+
   ans <- switch(
     operator,
     "=" = 0,
@@ -86,6 +87,55 @@ prob_independenta <- function(expresie) {
   print(evalueaza(operator, bound))
 
 }
+
+prob_conditionata <- function(expresie1, expresie2) {
+
+  parametri1 <- parseaza_expresie(expresie1)
+  parametri2 <- parseaza_expresie(expresie2)
+  print(parametri1)
+  print(parametri2)
+  op1 <- parametri1[2]
+  op2 <- parametri2[2]
+  bound1 <- parametri1[3]
+  bound2 <- parametri2[3]
+  ans1 <- evalueaza(op1, bound1)
+  show(ans1)
+  ans2 <- evalueaza(op2, bound2)
+  show(ans2)
+  if(ans1 == 0)
+      return(0);
+  if(ans2 == 0)
+      return ("Cannot divide by zero")
+
+  ## cazuri
+
+  ## caz in care conditia face probabilitatea sa fie imposibila
+  # p(x < 3 | x > 5) = 0
+  if (op1 %in% c("<=","<") && op2 %in% c(">=", ">") && bound1 >=bound2)
+    return (0);
+
+  # p(x > 5 | x < 3) = 0
+  if (op1 %in% c(">=",">") && op2 %in% c("<=", "<") && bound1 >=bound2)
+    return (0);
+
+ ## caz in care am acelasi fel de operator, facand intersectia defapt doar aleg intervalul cel mai restrans
+  # p(x> 3 | x>7)
+  if(op1 %in% c(">=",">") && op2 %in% c(">=",">"))
+    if(bound1 > bound2)
+      return (ans1/ans2)
+    else return (1);
+
+  if(op1 %in% c("<=","<") && op2 %in% c("<=","<"))
+    if(bound1 < bound2)
+    return (ans1/ans2)
+    else return (1)
+
+  ## daca nu e niciunul de mai sus, e intersectie de forma x > 5 | x < 7 si fac diferenta
+  print("salut")
+
+  return ((cdf(compute_bound(bound2))-cdf(compute_bound(bound1)))/ans2)
+
+}
   ############ END functii helper ###########
 
  ############ functie main ##################
@@ -98,7 +148,7 @@ prob_independenta <- function(expresie) {
   switch(len,
          "0" = return("Eroare"),
          "1" = return(prob_independenta(p)),
-         "2" = return("2 argumete"),
+         "2" = return(prob_conditionata(parti[1],parti[2])),
          )
   return ("eroare");
 
