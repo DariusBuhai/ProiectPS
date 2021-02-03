@@ -1,7 +1,9 @@
 
+library(mlr3misc)
+library(R6)
+
 data = Dictionary$new()
 
-library(R6)
 item = R6Class("Item")
 
 ########## UNIFORM ###########
