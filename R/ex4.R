@@ -1,5 +1,18 @@
 
+# integreaza pdf ca sa obtin valoarea cdf
+get_CDF_from_PDF <- function (f, x) {
+  tryCatch ({
+      integrate (f, 0, x)$value
+    },
+    error = function (e) {
+      print(e)
+    }
+  )
+}
 
+# verific daca functia de densitate este valida
+# trebuie sa fie pozitiva
+# probabilitatea totala trebuie sa fie 1 -> sigur se intampla ceva
 check_density <- function(f, a, b) {
   # verific prima conditie
   for (x in seq(a, b, 0.1)) {
@@ -21,6 +34,7 @@ check_density <- function(f, a, b) {
   return(TRUE)
 }
 
+# afisaza graficul densitatii
 plot_density <- function(f, a, b) {
   # validez pdf
   if (!check_density(f, a, b)) {
@@ -38,6 +52,9 @@ plot_density <- function(f, a, b) {
   plot(xs, ys, type="l", main="PDF", col="red", xlab="x", ylab="y")
 }
 
+# o folosesc pentru repartitiile standard carora le stim
+# functia de repartitie
+# afisaza graficul repartitiei
 plot_repartition <- function(F, a, b) {
   # calculez si afisez graficul CDF
 
@@ -45,6 +62,24 @@ plot_repartition <- function(F, a, b) {
   ys <- c()
   for (x in xs) {
     ys = append(ys, F(x))
+  }
+  plot(xs, ys, col="red", type="l", main="CDF", xlab="x", ylab="y")
+}
+
+# o folosesc pentru repartitiile carora
+# nu le stim functia de repartitie
+# ne folosim de pdf
+# afisaza graficul repartitiei
+plot_generic_repartition <- function(f, a, b) {
+  # validez pdf
+  if (!check_density(f, a, b)) {
+    return()
+  }
+
+  xs <- seq(a, b, 0.01)
+  ys <- c()
+  for (x in xs) {
+    ys = append(ys, get_CDF_from_PDF(f, x))
   }
   plot(xs, ys, col="red", type="l", main="CDF", xlab="x", ylab="y")
 }
@@ -136,6 +171,7 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
   }
 }
 
+
 #parse_known_repartition("uniform", FALSE, a=0, b=10)
 #parse_known_repartition("uniform", TRUE, a=0, b=10)
 #parse_known_repartition("exp", FALSE, lambda=2)
@@ -144,3 +180,4 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
 #parse_known_repartition("normal", TRUE, mu=0, sigma=1)
 #parse_known_repartition("pareto", FALSE, m=3, alpha=1)
 #parse_known_repartition("pareto", TRUE, m=3, alpha=1)
+#plot_generic_repartition(function(x) x / 2, 0, 2)
