@@ -35,7 +35,7 @@ check_density <- function(f, a, b) {
 }
 
 # afisaza graficul densitatii
-plot_density <- function(f, a, b) {
+plot_density <- function(f, a, b, name="") {
   # validez pdf
   if (!check_density(f, a, b)) {
     return()
@@ -49,13 +49,13 @@ plot_density <- function(f, a, b) {
   for (x in xs) {
     ys = append(ys, f(x))
   }
-  plot(xs, ys, type="l", main="PDF", col="red", xlab="x", ylab="y")
+  plot(xs, ys, type="l", main=noquote(paste(name, " PDF")), col="red", xlab="x", ylab="y")
 }
 
 # o folosesc pentru repartitiile standard carora le stim
 # functia de repartitie
 # afisaza graficul repartitiei
-plot_repartition <- function(F, a, b) {
+plot_repartition <- function(F, a, b, name) {
   # calculez si afisez graficul CDF
 
   xs <- seq(a, b, 0.01)
@@ -63,7 +63,7 @@ plot_repartition <- function(F, a, b) {
   for (x in xs) {
     ys = append(ys, F(x))
   }
-  plot(xs, ys, col="red", type="l", main="CDF", xlab="x", ylab="y")
+  plot(xs, ys, col="red", type="l", main=noquete(paste(name, " CDF")), xlab="x", ylab="y")
 }
 
 # o folosesc pentru repartitiile carora
@@ -104,10 +104,10 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       f <- function(x) 1 / (b - a)
       F <- function(x)(x - a) / (b - a)
       if (CDF) {
-        plot_repartition(F, a, b)
+        plot_repartition(F, a, b, name)
       }
       else {
-        plot_density(f, a, b)
+        plot_density(f, a, b, name)
       }
     }
     else {
@@ -124,10 +124,10 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       f <- function(x) (lambda * exp(1)^(-lambda * x))
       F <- function(x) (1 - exp(1)^(-lambda * x))
       if (CDF) {
-        plot_repartition(F, 0, 50)
+        plot_repartition(F, 0, 50, name)
       }
       else {
-        plot_density(f, 0, 50)
+        plot_density(f, 0, 50, name)
       }
     }
     else {
@@ -145,10 +145,10 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       f <- function(x) ((1 / (sigma * sqrt(pi * 2)))*(exp(1)^((-(x - mu)^2)/(2  * sigma ^ 2))))
       F <- function(x) (pnorm(x, mu, sigma))
       if (CDF) {
-        plot_repartition(F, -25, 25)
+        plot_repartition(F, -25, 25, name)
       }
       else {
-        plot_density(f, -25, 25)
+        plot_density(f, -25, 25, name)
       }
     }
     else {
@@ -166,10 +166,10 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       f <- function(x) (alpha * m^alpha) / (x ^ (alpha + 1))
       F <- function(x) (1 - (m ^ alpha) / (x ^ alpha))
       if (CDF) {
-        plot_repartition(F, m, m + 50)
+        plot_repartition(F, m, m + 50, name)
       }
       else {
-        plot_density(f, m, m + 50)
+        plot_density(f, m, m + 50, name)
       }
     }
   }
@@ -185,10 +185,10 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       F <- function(x) (1 / pi) * atan((x - location) / scale) + 1 / 2
 
       if (CDF) {
-        plot_repartition(F, -25, 25)
+        plot_repartition(F, -25, 25, name)
       }
       else {
-        plot_density(f, -25, 25)
+        plot_density(f, -25, 25, name)
       }
     }
   }
@@ -204,10 +204,10 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       F <- function(x) 1 / (1 + exp(1) ^ (-(x - mu) / s))
 
       if (CDF) {
-        plot_repartition(F, -25, 25)
+        plot_repartition(F, -25, 25, name)
       }
       else {
-        plot_density(f, -25, 25)
+        plot_density(f, -25, 25, name)
       }
     }
   }
@@ -229,10 +229,10 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       }
 
       if (CDF) {
-        plot_repartition(F, 0, 50)
+        plot_repartition(F, 0, 50, name)
       }
       else {
-        plot_density(f, 0, 50)
+        plot_density(f, 0, 50, name)
       }
     }
   }
