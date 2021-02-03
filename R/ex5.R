@@ -1,12 +1,4 @@
-# Example
-#f = function (x) {
-#  if(x<0 || x>1)
-#    return(0)
-#  x ^ 3
-#}
-#
-#initial_moment(f, 2)
-#central_moment(f, 2)
+
 
 # Calculating central moment of order o
 central_moment <- function(f, o){
@@ -34,3 +26,13 @@ initial_moment <- function(f, o){
   }
   res $ value
 }
+
+# Example:
+# f = function (x) {
+#   if(x<0 || x>1)
+#     return(0)
+#   x ^ 3
+# }
+#
+# initial_moment(f, 2)
+# central_moment(f, 2)

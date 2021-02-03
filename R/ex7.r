@@ -149,13 +149,14 @@ prob_conditionata <- function(expresie1, expresie2) {
   return ("eroare");
 
 }
-#exemplu
-g <- function (x) {
-  fun <- 0.1*(3*(x^2) + 1)
-  fun[x<0] = 0
-  fun[x>2]=0
-  return ( fun )
-}
-h <- function(x)(dunif(x))
-myP(g,"x>1|x<1.5") # 0.5897078
-myP(h,"x>0.6") # 0.4
+# Example:
+# g <- function (x) {
+#  fun <- 0.1*(3*(x^2) + 1)
+#  fun[x<0] = 0
+#  fun[x>2]=0
+#  return ( fun )
+# }
+#
+# h <- function(x)(dunif(x))
+# myP(g,"x>1|x<1.5") # 0.5897078
+# myP(h,"x>0.6") # 0.4

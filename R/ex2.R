@@ -1,14 +1,3 @@
-# Example
-# f <- function(x){
-#   if (x > 0 && x < 2){
-#      3/8 * (4*x-2*x^2)
-#   }else{
-#      0
-#   }
-# }
-#
-# check_pdf(f)
-
 # Check if a function is positive in a given interval
 is_positive <- function(f, d = c(-10000000, 10000000), step=10000000){
   # Set maximum lower and upper bounds
@@ -36,3 +25,14 @@ check_pdf <- function(f, d = c(-Inf, Inf)){
   v = i $ value
   round(v) == 1
 }
+
+# Example:
+# f <- function(x){
+#   if (x > 0 && x < 2){
+#      3/8 * (4*x-2*x^2)
+#   }else{
+#      0
+#   }
+# }
+#
+# check_pdf(f)
