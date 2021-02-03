@@ -7,7 +7,7 @@
 #    - iar p este un string ce reprezinta probabilitatea (conditionata sau independenta).
 #
 # Obligatoriu, var se va afla in stanga operatorului
-# Exemple: todo
+# Exemple: myP(g,"x>1|x<1.5")
 ####
 
  g <- function (x) {
@@ -150,5 +150,3 @@ prob_conditionata <- function(expresie1, expresie2) {
 
   ########### END functie main ##############
 }
-
-myP(g,"x>1|x<1.5")
