@@ -94,3 +94,6 @@ test_2 <- function() {
   f <- function(x, y) (3 / 2) * (x ^ 2 + y ^ 2)
   marginal_conditional_densities(f, 0, 0.5, c(0, 1), c(0, 1))
 }
+
+test_1()
+test_2()
