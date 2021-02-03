@@ -14,3 +14,8 @@ ex6 <- function(g, fx) {
   new_f<-(x-e_y)^2
   dispersie <-medium(new_f)
 }
+
+f1 <- function(x)(x^2)
+f2 <- dunif(x)
+
+ex6(f1,f2)
