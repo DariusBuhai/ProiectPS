@@ -1,9 +1,3 @@
-# Example
-# f1 <- function (x, y) {
-#   return (3/2 * (x^2+y^2))
-# }
-#
-# covariance_and_correlation(f1, c(0,1), c(0, 1))
 
 # Extracts x out of common density of x and y
 extract_x_marginal <- function(f, dx){
@@ -34,3 +28,10 @@ covariance_and_correlation <- function(pdf, dx, dy){
 
   list(cov = cov, cor = cor)
 }
+
+# Example
+# f1 <- function (x, y) {
+#   return (3/2 * (x^2+y^2))
+# }
+#
+# covariance_and_correlation(f1, c(0,1), c(0, 1))

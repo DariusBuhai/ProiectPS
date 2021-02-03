@@ -1,3 +1,4 @@
+library(pracma)
 
 # conditia 1 pentru o functie de densitate corecta
 # f trebuie sa aiba valori pozitive pentru
