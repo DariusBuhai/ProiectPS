@@ -10,9 +10,15 @@
 }
 \examples{
 
-  fx <- function(t) dnorm(t, 0.5, 0.9)
-  fy <- function(t) dlnorm(t, 1.2, 0.99)
+  f_1 <- function(x)(pnorm(x,mean=1))
+  f_2 <- function(x)(pnorm(x,mean=2))
+  f_3 <- Vectorize(convolution_sum(f_1, f_2))
+  f_4 <- Vectorize(convolution_diff(f_1,f_2))
+  frez <- Vectorize(f_3)
 
-  convolution_sum(fx, fy)
-  convolution_diff(fx, fy)
+  t = seq(1,10)
+  plot(f_1,from=-10,to=10,type="l")
+  plot(f_2,from=-10,to=10,type="l")
+  plot(f_3(t),from=-10,to=10,type="l")
+  plot(f_4(t),from=-10,to=10,type="l")
 }
