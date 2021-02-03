@@ -84,6 +84,13 @@ plot_generic_repartition <- function(f, a, b) {
   plot(xs, ys, col="red", type="l", main="CDF", xlab="x", ylab="y")
 }
 
+
+# functia primeste ca parametrii numele repartitiei,
+# un flag care marcheaza daca vrem graficul densitatii,
+# sau al repartitiei, si, in plus, parametrii corespunzatori
+# repartitiei selectate
+# daca repartitia nu exista, sau daca parametrii nu corespund
+# repartitiei alese, se va intoarce un mesaj corespunzator
 parse_known_repartition <- function(name, CDF=FALSE, ...) {
   params <- list(...)
   if (name == "uniform") {
@@ -91,7 +98,7 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       a <- params$a
       b <- params$b
       if (a >= b) {
-        return("parametri nevalizi")
+        return("parametri incorecti")
       }
 
       f <- function(x) 1 / (b - a)
@@ -111,7 +118,7 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
     if (!is.null(params$lambda)) {
       lambda <- params$lambda
       if (lambda <= 0) {
-        return("parametru nevalizi")
+        return("parametrii incorecti")
       }
 
       f <- function(x) (lambda * exp(1)^(-lambda * x))
@@ -132,7 +139,7 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       mu <- params$mu
       sigma <- params$sigma
       if (sigma <= 0) {
-        return("parametru nevalid")
+        return("parametrii incorecti")
       }
 
       f <- function(x) ((1 / (sigma * sqrt(pi * 2)))*(exp(1)^((-(x - mu)^2)/(2  * sigma ^ 2))))
@@ -153,7 +160,7 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       m <- params$m
       alpha <-params$alpha
       if (alpha <= 0 || m <= 0) {
-        return("parametrii nevalizi")
+        return("parametrii incorecti")
       }
 
       f <- function(x) (alpha * m^alpha) / (x ^ (alpha + 1))
@@ -166,18 +173,88 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       }
     }
   }
+  else if (name == "cauchy") {
+    if (!is.null(params$location && !is.null(params$scale))) {
+      location <- params$location
+      scale <- params$scale
+      if (scale <= 0) {
+        return("parametrii incorecti")
+      }
+
+      f <- function(x) 1 / (pi * scale * (1 + ((x - location) / (scale))^2))
+      F <- function(x) (1 / pi) * atan((x - location) / scale) + 1 / 2
+
+      if (CDF) {
+        plot_repartition(F, -25, 25)
+      }
+      else {
+        plot_density(f, -25, 25)
+      }
+    }
+  }
+  else if (name == "logistic") {
+    if (!is.null(params$mu && !is.null(params$s))) {
+      mu <- params$mu
+      s <- params$s
+      if (s <= 0) {
+        return("parametrii incorecti")
+      }
+
+      f <- function(x) (exp(1) ^ ((mu - x) / s) / (s * (1 + exp(1) ^ (mu - x) / s) ^ 2))
+      F <- function(x) 1 / (1 + exp(1) ^ (-(x - mu) / s))
+
+      if (CDF) {
+        plot_repartition(F, -25, 25)
+      }
+      else {
+        plot_density(f, -25, 25)
+      }
+    }
+  }
+  else if (name == "weibull") {
+    if (!is.null(params$scale && !is.null(params$shape))) {
+      scale <- params$scale
+      shape <- params$shape
+      if (scale <= 0 || shape <= 0) {
+        return("parametrii incorecti")
+      }
+
+      f <- function(x) {
+        if (x >= 0) (shape / scale) * (x / scale) ^ (shape - 1) * (exp(1) ^ (-(x / scale) ^ shape))
+        else 0
+      }
+      F <- function(x) {
+        if (x >= 0) 1 - (exp(1) ^ (-(x / scale) ^ shape))
+        else 0
+      }
+
+      if (CDF) {
+        plot_repartition(F, 0, 50)
+      }
+      else {
+        plot_density(f, 0, 50)
+      }
+    }
+  }
   else {
     print("repartitie necunoscuta")
   }
 }
 
+# exemple de utilizare a functionalitatii implementate
 
-#parse_known_repartition("uniform", FALSE, a=0, b=10)
-#parse_known_repartition("uniform", TRUE, a=0, b=10)
-#parse_known_repartition("exp", FALSE, lambda=2)
-#parse_known_repartition("exp", TRUE, lambda=2)
-#parse_known_repartition("normal", FALSE, mu=0, sigma=1)
-#parse_known_repartition("normal", TRUE, mu=0, sigma=1)
-#parse_known_repartition("pareto", FALSE, m=3, alpha=1)
-#parse_known_repartition("pareto", TRUE, m=3, alpha=1)
-#plot_generic_repartition(function(x) x / 2, 0, 2)
+parse_known_repartition("uniform", FALSE, a=0, b=10)
+parse_known_repartition("uniform", TRUE, a=0, b=10)
+parse_known_repartition("exp", FALSE, lambda=2)
+parse_known_repartition("exp", TRUE, lambda=2)
+parse_known_repartition("normal", FALSE, mu=0, sigma=1)
+parse_known_repartition("normal", TRUE, mu=0, sigma=1)
+parse_known_repartition("pareto", FALSE, m=3, alpha=1)
+parse_known_repartition("pareto", TRUE, m=3, alpha=1)
+parse_known_repartition("cauchy", FALSE, location=0, scale=1)
+parse_known_repartition("cauchy", TRUE, location=0, scale=1)
+parse_known_repartition("logistic", FALSE, mu=0, s=1)
+parse_known_repartition("logistic", TRUE, mu=0, s=1)
+parse_known_repartition("weibull", FALSE, scale=1, shape=2)
+parse_known_repartition("weibull", TRUE, scale=1, shape=2)
+plot_generic_repartition(function(x) x / 2, 0, 2)
