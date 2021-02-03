@@ -60,6 +60,7 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       }
 
       f <- function(x) 1 / (b - a)
+      F <- function(x)(x - a) / (b - a)
       if (CDF) {
         plot_repartition(F, a, b)
       }
