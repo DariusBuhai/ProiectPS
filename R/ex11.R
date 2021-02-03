@@ -1,3 +1,4 @@
+library(pracma)
 
 # conditia 1 pentru o functie de densitate corecta
 # f trebuie sa aiba valori pozitive pentru
@@ -85,15 +86,10 @@ marginal_conditional_densities <- function(f, x, y, ab, cd) {
   })
 }
 
-test_1 <- function() {
-  f <- function(x, y) (8 / 3) * x ^ 3 * y
-  marginal_conditional_densities(f, 0.5, 1.5, c(0, 1), c(1, 2))
-}
-
-test_2 <- function() {
-  f <- function(x, y) (3 / 2) * (x ^ 2 + y ^ 2)
-  marginal_conditional_densities(f, 0, 0.5, c(0, 1), c(0, 1))
-}
-
-test_1()
-test_2()
+# Examples:
+#
+# f <- function(x, y) (8 / 3) * x ^ 3 * y
+# marginal_conditional_densities(f, 0.5, 1.5, c(0, 1), c(1, 2))
+#
+# f <- function(x, y) (3 / 2) * (x ^ 2 + y ^ 2)
+# marginal_conditional_densities(f, 0, 0.5, c(0, 1), c(0, 1))
