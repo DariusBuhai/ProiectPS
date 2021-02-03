@@ -55,8 +55,7 @@ evalueaza <- function(operator, bound) {
 
   bound = compute_bound(bound)
   integrala <- cdf(bound)
-  print(operator)
-  print(bound)
+
 
   ans <- switch(
     operator,
@@ -92,8 +91,6 @@ prob_conditionata <- function(expresie1, expresie2) {
 
   parametri1 <- parseaza_expresie(expresie1)
   parametri2 <- parseaza_expresie(expresie2)
-  print(parametri1)
-  print(parametri2)
   op1 <- parametri1[2]
   op2 <- parametri2[2]
   bound1 <- parametri1[3]
@@ -131,7 +128,6 @@ prob_conditionata <- function(expresie1, expresie2) {
     else return (1)
 
   ## daca nu e niciunul de mai sus, e intersectie de forma x > 5 | x < 7 si fac diferenta
-  print("salut")
 
   return ((cdf(compute_bound(bound2))-cdf(compute_bound(bound1)))/ans2)
 
@@ -154,3 +150,5 @@ prob_conditionata <- function(expresie1, expresie2) {
 
   ########### END functie main ##############
 }
+
+myP(g,"x>1|x<1.5")
