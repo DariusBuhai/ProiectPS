@@ -1,4 +1,4 @@
-\name{ex10}
+\name{ex1}
 \alias{Normalizing Constant}
 \title{Normalizing Constant}
 \usage{
