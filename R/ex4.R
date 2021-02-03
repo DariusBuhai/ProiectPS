@@ -1,13 +1,4 @@
 
-# folosind definitia
-get_CDF_from_PDF <- function (f, x) {
-  tryCatch ({
-      integral(Vectorize(f), -Inf, x, method="Gauss")
-    }, error = function (e) {
-      # print(e)
-    }
-  )
-}
 
 check_density <- function(f, a, b) {
   # verific prima conditie
@@ -47,18 +38,13 @@ plot_density <- function(f, a, b) {
   plot(xs, ys, type="l", main="PDF", col="red", xlab="x", ylab="y")
 }
 
-plot_repartition <- function(f, a, b) {
-  # validez pdf
-  if (!check_density(f, a, b)) {
-    return()
-  }
-
+plot_repartition <- function(F, a, b) {
   # calculez si afisez graficul CDF
 
   xs <- seq(a, b, 0.01)
   ys <- c()
   for (x in xs) {
-    ys = append(ys, get_CDF_from_PDF(f, x))
+    ys = append(ys, F(x))
   }
   plot(xs, ys, col="red", type="l", main="CDF", xlab="x", ylab="y")
 }
@@ -70,7 +56,7 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       a <- params$a
       b <- params$b
       if (a >= b) {
-        return("parametri invalizi")
+        return("parametri nevalizi")
       }
 
       f <- function(x) 1 / (b - a)
@@ -89,10 +75,11 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
     if (!is.null(params$lambda)) {
       lambda <- params$lambda
       if (lambda <= 0) {
-        return("parametru invalizi")
+        return("parametru nevalizi")
       }
 
       f <- function(x) (lambda * exp(1)^(-lambda * x))
+      F <- function(x) (1 - exp(1)^(-lambda * x))
       if (CDF) {
         plot_repartition(f, 0, 50)
       }
@@ -109,10 +96,11 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       mu <- params$mu
       sigma <- params$sigma
       if (sigma <= 0) {
-        return("parametru invalid")
+        return("parametru nevalid")
       }
 
       f <- function(x) ((1 / (sigma * sqrt(pi * 2)))*(exp(1)^((-(x - mu)^2)/(2  * sigma ^ 2))))
+      F <- function(x) (pnorm(x, mu, sigma))
       if (CDF) {
         plot_repartition(f, -25, 25)
       }
@@ -129,17 +117,21 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
       m <- params$m
       alpha <-params$alpha
       if (alpha <= 0 || m <= 0) {
-        return("parametru invalid")
+        return("parametrii nevalizi")
       }
 
       f <- function(x) (alpha * m^alpha) / (x ^ (alpha + 1))
+      F <- function(x) (1 - (m ^ alpha) / (x ^ alpha))
       if (CDF) {
         plot_repartition(f, m, m + 50)
       }
       else {
-        plot_density(f, m, m + 50)
+        plot_density(F, m, m + 50)
       }
     }
+  }
+  else {
+    print("repartitie necunoscuta")
   }
 }
 
@@ -150,4 +142,4 @@ parse_known_repartition <- function(name, CDF=FALSE, ...) {
 #parse_known_repartition("normal", FALSE, mu=0, sigma=1)
 #parse_known_repartition("normal", TRUE, mu=0, sigma=1)
 #parse_known_repartition("pareto", FALSE, m=3, alpha=1)
-parse_known_repartition("pareto", TRUE, m=3, alpha=1)
+#parse_known_repartition("pareto", TRUE, m=3, alpha=1)
