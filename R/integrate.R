@@ -2,6 +2,7 @@
 safe_integrate <- function(f, d = c(-Inf, Inf)){
   tryCatch(integrate(Vectorize(f), d[1], d[2]),
            error = function(e){
+             print(e)
              FALSE
            })
 }
