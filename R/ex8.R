@@ -111,12 +111,12 @@ output_details <- function(distribution_name) {
 }
 
 
-########## TESTE ###########
-
-output_details("uniform")
-output_details("exponential")
-output_details("normal")
-output_details("pareto")
-output_details("cauchy")
-output_details("logistic")
-output_details("weibull")
+# Examples:
+#
+# output_details("uniform")
+# output_details("exponential")
+# output_details("normal")
+# output_details("pareto")
+# output_details("cauchy")
+# output_details("logistic")
+# output_details("weibull")
