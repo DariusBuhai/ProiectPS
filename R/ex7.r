@@ -7,10 +7,7 @@
 #    - iar p este un string ce reprezinta probabilitatea (conditionata sau independenta).
 #
 # Obligatoriu, var se va afla in stanga operatorului
-<<<<<<< HEAD
-# Exemple: myP(g,"x>1|x<1.5")
-=======
->>>>>>> 90a04ef (comentat cod)
+
 ####
 
 

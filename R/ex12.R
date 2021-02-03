@@ -4,13 +4,8 @@ convolution_sum <- function(fx,fy) {
   function(z) (
     integral(function(y) {
       fx(z-y) * fy(y)
-<<<<<<< HEAD
-    },-Inf,Inf)
-  )
-=======
       },-Inf,Inf)
   }
->>>>>>> 90a04ef (comentat cod)
 }
 
 # diferenta a doua variabile aleatoare continue independente folosind formula de convolutie
