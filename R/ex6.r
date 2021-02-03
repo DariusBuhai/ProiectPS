@@ -1,9 +1,6 @@
 ### Cerinta 6: Calculul mediei și dispersiei unei variabile aleatoare g(X), unde X are o repartiție continuă cunoscută
 ## iar g este o funcție continuă precizată de utilizator.
 
-medium <- function(f, d = c(-Inf, Inf)){
-  integrate(function(x){ x * f(x)}, d[1],d[2]) $ value
-}
 
 ex6 <- function(g, fx) {
   # y = g(X) e o noua variabila aleatoare, ii calculez media
@@ -25,9 +22,9 @@ ex6_2 <- function(g,fx) {
   print(e_y)
   print(dispersie)
 }
+                    
 f1 <- function(x)(x+3)
 f2 <- function(x) (1 * exp(1)^(-1 * x))
 plot(seq(-10,10,0.1),f2(seq(-10,10,0.1)))
 ex6(f1,f2)
 ex6_2(f1,f2)
-
