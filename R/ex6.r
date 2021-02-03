@@ -1,3 +1,4 @@
+library(pracma)
 
 ### Cerinta 6: Calculul mediei și dispersiei unei variabile aleatoare g(X), unde X are o repartiție continuă cunoscută
 ## iar g este o funcție continuă precizată de utilizator.
@@ -17,8 +18,8 @@ median_and_dispersion <- function(g, fx, domeniu_valori) {
   print(paste("Dispersia:", dispersie))
 }
 
-# exemplu
-f1 <- function(x)(x^2)
-f2 <- function(x) (1 * exp(1)^(-1 * x))
+# Example
+# f1 <- function(x)(x^2)
+# f2 <- function(x) (1 * exp(1)^(-1 * x))
 
-median_and_dispersion(f1,f2, c(0,Inf)) # 2, 20
+# median_and_dispersion(f1,f2, c(0,Inf)) # 2, 20
