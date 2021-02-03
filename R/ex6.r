@@ -16,3 +16,9 @@ median_and_dispersion <- function(g, fx, domeniu_valori) {
   print(paste("Media: ",e_y))
   print(paste("Dispersia:", dispersie))
 }
+
+# exemplu
+f1 <- function(x)(x^2)
+f2 <- function(x) (1 * exp(1)^(-1 * x))
+
+median_and_dispersion(f1,f2, c(0,Inf)) # 2, 20
